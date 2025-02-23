@@ -1,0 +1,66 @@
+// Copyright © SixtyFPS GmbH <info@slint.dev>
+// SPDX-License-Identifier: MIT
+import { Button, LineEdit, HorizontalBox } from "std-widgets.slint";
+
+global Palette  {
+    in-out property<color> dark-purple: #1B2430;
+    in-out property<color> primary: #51557E;
+    in-out property<color> secondary: #816797;
+    in-out property<color> dark-secondary: #392a45;
+    in-out property<color> tertiary: #D6D5A8;
+    in-out property<color> white: #FFF2F9;
+    in-out property<color> black: #323232;
+}
+
+component Main inherits Rectangle {
+    width: 1500px;
+    height: 900px;
+    background: Palette.dark-purple;
+
+    Rectangle {
+        y: 0px;
+        height: 80px;
+        width: parent.width;
+        background: Palette.primary;
+    }
+
+    Rectangle {
+        y: 80px;
+        height: parent.height / 2;
+        width: parent.width / 2;
+    }
+
+    Rectangle {
+        x: parent.width / 2;
+        y: 80px;
+        height: parent.height / 2;
+        width: parent.width / 2;
+        background: Palette.dark-secondary;
+    }
+
+    Rectangle {
+        y: (parent.height / 2) + 50px;
+        height: 300px;
+        width: parent.width;
+        background: Palette.secondary;
+
+        Rectangle {
+            y: 0px;
+            height: 50px;
+            width: parent.width;
+            background: Palette.primary;
+        }
+    }
+
+    Rectangle {
+        y: (parent.height / 2) + 350px;
+        height: 50px;
+        width: parent.width;
+        background: Palette.tertiary;
+    }
+}
+
+
+export component CodeEditor inherits Window {
+    Main {}
+}
