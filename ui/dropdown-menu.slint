@@ -1,0 +1,46 @@
+import { VerticalBox, Button } from "std-widgets.slint";
+
+export component DropdownMenu inherits Rectangle {
+    in-out property <[string]> options;
+    in-out property <color> dropdownBackground;
+    callback option_clicked(string);
+
+    Text {
+
+        text: "Hi!";
+        color: #ffffff;
+    }
+
+    popup := PopupWindow {
+        Rectangle {
+            background: dropdownBackground;
+        }
+
+        x: 20px;
+        y: 20px;
+
+        VerticalLayout {
+            for option in options: Rectangle {
+                height: 25%;
+                width: 100%;
+                padding: 10px;
+                Text {
+                    text: option;
+                }
+
+                TouchArea {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    TouchArea {
+        height: 100%;
+        width: 100%;
+        clicked => {
+            popup.show();
+        }
+    }
+}

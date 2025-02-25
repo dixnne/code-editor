@@ -1,66 +1,92 @@
-// Copyright © SixtyFPS GmbH <info@slint.dev>
-// SPDX-License-Identifier: MIT
-import { Button, LineEdit, HorizontalBox } from "std-widgets.slint";
+import { Button, TextEdit, TabWidget } from "std-widgets.slint";
+import { DropdownMenu } from "dropdown-menu.slint";
 
-global Palette  {
-    in-out property<color> dark-purple: #1B2430;
-    in-out property<color> primary: #51557E;
-    in-out property<color> secondary: #816797;
-    in-out property<color> dark-secondary: #392a45;
-    in-out property<color> tertiary: #D6D5A8;
-    in-out property<color> white: #FFF2F9;
-    in-out property<color> black: #323232;
+export global Palette {
+    in-out property <color> dark-purple: #1B2430;
+    in-out property <color> primary: #51557E;
+    in-out property <color> secondary: #816797;
+    in-out property <color> dark-secondary: #392a45;
+    in-out property <color> tertiary: #D6D5A8;
+    in-out property <color> white: #FFF2F9;
+    in-out property <color> black: #323232;
+    in-out property <color> dropwdown: #d9d9d9;
 }
 
-component Main inherits Rectangle {
-    width: 1500px;
-    height: 900px;
-    background: Palette.dark-purple;
+component Main inherits Window {
+    width: 1280px;
+    height: 720px;
 
-    Rectangle {
-        y: 0px;
-        height: 80px;
-        width: parent.width;
-        background: Palette.primary;
+    MenuBar {
+        
     }
 
-    Rectangle {
-        y: 80px;
-        height: parent.height / 2;
-        width: parent.width / 2;
-    }
+    VerticalLayout {
+        HorizontalLayout {
+            
 
-    Rectangle {
-        x: parent.width / 2;
-        y: 80px;
-        height: parent.height / 2;
-        width: parent.width / 2;
-        background: Palette.dark-secondary;
-    }
+            max-height: 200px;
+            DropdownMenu {
+                background: Palette.tertiary;
+                dropdownBackground: Palette.dropwdown;
+                options: ["Test", "Testing"];
+            }
+        }
 
-    Rectangle {
-        y: (parent.height / 2) + 50px;
-        height: 300px;
-        width: parent.width;
-        background: Palette.secondary;
+        HorizontalLayout {
+            TextEdit {
+                font-size: 14px;
+                width: parent.width / 2;
+                text: "Hi!";
+            }
+
+            TabWidget {
+                Tab {
+                    title: "Lexico";
+                }
+
+                Tab {
+                    title: "Sintactico";
+                }
+
+                Tab {
+                    title: "Semantic";
+                }
+
+                Tab {
+                    title: "Intermidiate code";
+                }
+
+                Tab {
+                    title: "Execution";
+                }
+            }
+        }
 
         Rectangle {
-            y: 0px;
-            height: 50px;
-            width: parent.width;
+            max-height: 30px;
+            background: Palette.secondary;
+            Text {
+                text: "Errors";
+                horizontal-alignment: left;
+                color: Palette.white;
+                font-size: 20px;
+            }
+        }
+
+        Rectangle {
+            max-height: 150px;
             background: Palette.primary;
         }
-    }
 
-    Rectangle {
-        y: (parent.height / 2) + 350px;
-        height: 50px;
-        width: parent.width;
-        background: Palette.tertiary;
+        Rectangle {
+            max-height: 30px;
+            background: Palette.tertiary;
+        }
     }
 }
 
-
-export component CodeEditor inherits Window {
-    Main {}
+export component IDE inherits Window {
+    width: 1280px;
+    height: 720px;
+    Main { }
 }
